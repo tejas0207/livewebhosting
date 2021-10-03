@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+
+        <meta charset="UTF-8">
+        
+        <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+        
+        <meta name="apple-mobile-web-app-title" content="CodePen">
+
+        <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+        <link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> 
+        
+        <link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'>
+
+        <title>WebHosting</title>
+
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  
+<style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+        }
+        ul{
+            list-style-type: none;
+        }
+        .wrapHead{
+            width: 90%;
+            margin: 0 auto;
+            transition: all ease-in-out 0.5s;
+        }
+        .wrapHead.fixed-to-top{
+            width: 96%;
+        }
+        header{
+            position: fixed;
+            width: 100%;
+            background: rgba(38, 50, 56, 0.5);
+            padding: 10px 0;
+            z-index: 1;
+            transition: all ease-in-out 0.5s;
+        }
+        header:after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        header.fixed-to-top{
+            background: rgba(38, 50, 56, 1);
+        }
+        #brand{
+            color: #ccc;
+            float: left;
+        }
+        #brand h1{
+            letter-spacing: 10px;
+            text-shadow: 2px 2px 5px #111;
+        }
+        nav{
+            float: right;
+            margin-top: 10px;
+        }
+        nav li{
+            display: inline-block;
+            margin: 0 4px;
+        }
+        nav li a{
+            padding: 10px 0;
+            text-decoration: none;
+            color: #e1e1e1;
+            transition: all ease-in-out 0.5s;
+        }
+        nav li a:hover{
+            color: #bbb;
+        }
+        section{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            z-index: 0;
+        }
+        section h2{
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+            text-transform: capitalize;
+            text-shadow: 10px 10px 3px rgba(0,0,0, 0.2);
+        }
+        #home{
+            background: #90CAF9;
+        }
+        #about{
+            background: #EF9A9A;
+        }
+        #services{
+            background: #FFE082;
+        }
+        #contact{
+            background: #C5E1A5;
+            padding-top: 10%;
+        }
+        .wrapper {
+            width: 100%;
+            height: 50%;
+            display: block;
+            /* align-items: center;*/
+            padding-top: 15%;
+            padding-left: 45%;
+            justify-content: center; 
+        }
+        .wrapper .file-upload {
+            height: 200px;
+            width: 200px;
+            border-radius: 100px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid #FFFFFF;
+            overflow: hidden;
+            background-image: linear-gradient(to bottom, #EF9A9A 50%, #FFFFFF 50%);
+            background-size: 100% 200%;
+            transition: all 1s;
+            color: #FFFFFF;
+            font-size: 100px;
+        }
+        .wrapper .file-upload input[type=file] {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .wrapper .file-upload:hover {
+            background-position: 0 -100%;
+            color: #EF9A9A;
+        }
+
+        /* ----------------button-------------- */
+
+        .hide {
+            display: none;
+        }
+
+        .submit-button {
+            padding-top: 8px;
+            display: block;
+            font-family: "Open Sans", Helvetica, Arial, sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            letter-spacing: 1px;
+            height: 50px;
+            width: 140px;
+            line-height: 38px;
+            overflow: hidden;
+            background: #4dbecf;
+            border-radius: 3px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .submit-button:hover, .submit-button:focus {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .submit-button.animated {
+            -webkit-animation: 0.75s short-press cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            animation: 0.75s short-press cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        .submit-button > span {
+            display: block;
+            color: white;
+            text-align: center;
+        }
+        .submit-button > span.pre-state-msg {
+            transition: all 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+            transition-delay: 0.75s;
+        }
+        .submit-button.state-1 .pre-state-msg {
+            margin-top: -38px;
+        }
+        .submit-button.state-2 .pre-state-msg {
+            margin-top: -76px;
+        }
+        a{
+                text-decoration:none ;
+                border: none;
+        }
+        .submit_button{
+                padding-top: 50px;
+                padding-left: 43px;
+                justify-content: center; 
+                
+        }
+        /* ----------------button-------------- */
+        /* heading */
+        .our-team {
+  padding: 50px 30px 70px 30px;  
+  margin-bottom: 30px;
+  background-color: #f7f5ec;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  margin-right:20px;
+}
+
+.our-team .picture {
+  display: inline-block;
+  height: 130px;
+  width: 130px;
+  margin-bottom: 50px;
+  z-index: 1;
+  position: relative;
+}
+
+.our-team .picture::before {
+  content: "";
+  width: 100%;
+  height: 0;
+  border-radius: 50%;
+  background-color: #ff5a6e;
+  position: absolute;
+  bottom: 135%;
+  right: 0;
+  left: 0;
+  opacity: 0.9;
+  transform: scale(3);
+  transition: all 0.3s linear 0s;
+}
+
+.our-team:hover .picture::before {
+  height: 100%;
+}
+
+.our-team .picture::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ff5a6e;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.our-team .picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.9s ease 0s;
+}
+
+.our-team:hover .picture img {
+  box-shadow: 0 0 0 14px #f7f5ec;
+  transform: scale(0.7);
+}
+
+.our-team .title {
+  display: block;
+  font-size: 15px;
+  color: #4e5052;
+  text-transform: capitalize;
+}
+
+.our-team .social {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #ff5a6e;
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  transition: all 0.5s ease 0s;
+}
+
+.our-team:hover .social {
+  bottom: 0;
+}
+
+.our-team .social li {
+  display: inline-block;
+}
+
+.our-team .social li a {
+  display: block;
+  padding: 10px;
+  font-size: 17px;
+  color: white;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+.our-team .social li a:hover {
+  color: #ff5a6e;
+  background-color: #f7f5ec;
+}
+.row{
+    padding-left: 20%;
+}
+
+/* heaading */
+.site-heading h2 {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.site-heading h2 span {
+  color: #ff5a6e;
+}
+
+.site-heading h4 {
+  display: inline-block;
+  padding-bottom: 20px;
+  position: relative;
+  text-transform: capitalize;
+  z-index: 1;
+}
+
+.site-heading h4::before {
+  background: #ff5a6e none repeat scroll 0 0;
+  bottom: 0;
+  content: "";
+  height: 2px;
+  left: 50%;
+  margin-left: -25px;
+  position: absolute;
+  width: 50px;
+}
+
+.site-heading h2 span {
+  color: #ff5a6e;
+}
+
+.site-heading {
+  margin-bottom: 60px;
+  overflow: hidden;
+  margin-top: -5px;
+}
+a{
+    text-decoration: none;
+}
+</style>
+<script>
+    window.console = window.console || function(t) {};
+  </script>
+  
+    
+    
+    <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+  </script>
+  
+<script>
+    window.console = window.console || function(t) {};
+</script>
+  
+<script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+</script>
+
+<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-d8236034cc3508e70b0763f2575a8bb5850f9aea541206ce56704c013047d712.js"></script>
+<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-4793b73c6332f7f14a9b6bba5d5e62748e9d1bd0b5c52d7af6376f3d1c625d7e.js"></script>
+<script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
+
+</head>
+
+<body translate="no" >
+    <header>
+        <div class="wrapHead">
+            <div id="brand">
+                <h1>LIVE</h1>
+            </div>
+            <nav>
+            <ul>
+                <li><a href="#home" class="scroll">Home</a></li>
+                <li><a href="#about" class="scroll">About</a></li>
+                <li><a href="#contact" class="scroll">Contact</a></li>   
+            </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- HOME PAGE -->
+    <section id="home">
+        <h2>home</h2>
+    </section>
+    <!-- ABOUT PAGE -->
+    <section id="about">
+        <div class="wrapper">
+            <!-- <form action="/after" method="POST" enctype="multipart/form-data"> -->
+                <div class="file-upload">
+                    <input type="file" />
+                    <i class="fa fa-arrow-up"></i>
+                    
+                </div>
+                
+                <div class="submit_button">
+                    <a href="#" method="GET"><button class="submit-button state-0"><span class="pre-state-msg">Submit</span>
+                        <span class="current-state-msg hide">Sending...</span>
+                        <span class="done-state-msg hide">Done!</span></button></a>
+                </div>
+            <!-- </form> -->    
+        </div>
+        <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+        <script id="rendered-js" >
+            /*
+                A styled file input.
+                by @ste_baker
+            
+            */
+            //# sourceURL=pen.js
+        </script>
+        <!-- BUTTON SCRIPT -->
+        <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+        <script  src="https://cdpn.io/cp/internal/boomboom/pen.js?key=pen.js-cc9e1e84-723c-b311-4606-2bbb4de6160b" crossorigin></script>
+        <script>
+            const button = document.querySelector('.submit-button'),
+            stateMsg = document.querySelector('.pre-state-msg');
+        
+            const updateButtonMsg = function() {
+            button.classList.add('state-1', 'animated');
+            
+            setTimeout(finalButtonMsg, 2000);
+            };
+            
+            const finalButtonMsg = function() {
+            button.classList.add('state-2');
+            
+            setTimeout(setInitialButtonState, 2000);
+            };
+            
+            const setInitialButtonState = function() {
+            button.classList.remove('state-1', 'state-2', 'animated');
+            };
+            
+            button.addEventListener('click', updateButtonMsg);
+        </script>
+    </section>
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="site-heading text-center">
+                <h2>Our <span>Team</span></h2>
+                <h4>Meet our awesome and expert team members</h4>
+            </div>
+          <div class="row">
+           
+            <div class="col-12 col-sm-6 col-md-5 ">
+              <div class="our-team">
+                <div class="picture">
+                  <img class="img-fluid" src="https://picsum.photos/130/130?image=839">
+                </div>
+                <div class="team-content">
+                  <h3 class="name">Patricia Knott</h3>
+                  <h4 class="title">Web Developer</h4>
+                </div>
+                <ul class="social">
+                  <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-facebook" aria-hidden="true"></a></li>
+                  <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-twitter" aria-hidden="true"></a></li>
+                  <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-google-plus" aria-hidden="true"></a></li>
+                  <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-linkedin" aria-hidden="true"></a></li>
+                </ul>
+              </div>
+            </div>
+                <div class="col-12 col-sm-6 col-md-5 ">
+              <div class="our-team">
+                <div class="picture">
+                  <img class="img-fluid" src="https://picsum.photos/130/130?image=856">
+                </div>
+                <div class="team-content">
+                  <h3 class="name">Justin Ramos</h3>
+                  <h4 class="title">Web Developer</h4>
+                </div>
+                <ul class="social">
+                  <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-facebook" aria-hidden="true"></a></li>
+                  <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-twitter" aria-hidden="true"></a></li>
+                  <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-google-plus" aria-hidden="true"></a></li>
+                  <li><a href="https://codepen.io/collection/XdWJOQ/" class="fa fa-linkedin" aria-hidden="true"></a></li>
+                </ul>
+              </div>
+            </div>
+                
+          </div>
+        </div>
+    </section>
+
+        <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+        <script id="rendered-js" >
+            $(document).ready(function () {
+            var docEl = $(document),
+            headerEl = $('header'),
+            headerWrapEl = $('.wrapHead'),
+            navEl = $('nav'),
+            linkScroll = $('.scroll');
+
+            docEl.on('scroll', function () {
+                if (docEl.scrollTop() > 60) {
+                headerEl.addClass('fixed-to-top');
+                headerWrapEl.addClass('fixed-to-top');
+                navEl.addClass('fixed-to-top');
+                } else
+                {
+                headerEl.removeClass('fixed-to-top');
+                headerWrapEl.removeClass('fixed-to-top');
+                navEl.removeClass('fixed-to-top');
+                }
+            });
+
+            linkScroll.click(function (e) {
+                e.preventDefault();
+                $('body, html').animate({
+                scrollTop: $(this.hash).offset().top },
+                500);
+            });
+            });
+            //# sourceURL=pen.js
+        </script>
+
+    
+
+    <!-- Code injected by live-server -->
+    <script type="text/javascript">
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+</body>
+
+</html>
+ 
