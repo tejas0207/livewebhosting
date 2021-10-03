@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <style>
+             body {
+                font-family: system-ui;
+                background: #c4f585;
+                color: rgb(8, 8, 8);
+                text-align: center;
+                }
+            /* .blue-color {
+            color:blue;
+            font-size: 200px;
+            }
+            .green-color {
+            color:green;
+            }
+            .teal-color {
+            color:teal;
+            }
+            .yellow-color {
+            color:yellow;
+            }
+            .red-color {
+            color:red;
+            } */
+            .black-color{
+                font-size:large;
+            }
+            button{
+                border-style: none;
+                background-color:#c4f585;
+            }
+            #myInput{
+                border: none;
+                background-color: #c4f585;
+                font-size: large;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            </style>
+            <script>
+                document.getElementsByTagName("h1")[0].style.fontSize = "6vw";
+            </script>
+    </head>
+<body>
+
+
+<input type="text" value="http://s3bucket:12.html" id="myInput" disabled="disabled">
+<button onclick="myFunction()"><i class="fa fa-copy black-color" ></i></button>
+<!-- <i class="fa fa-copy blue-color " ></i>
+<i class="fa fa-copy green-color " ></i>
+<i class="fa fa-copy teal-color " ></i>
+<i class="fa fa-copy yellow-color " ></i>
+<i class="fa fa-copy red-color " ></i>
+<i class="fa fa-copy black-color" ></i> -->
+<script>
+function myFunction() {
+  /* Get the text field */
+  var copyText = document.getElementById("myInput");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+  /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
+  
+  /* Alert the copied text */
+  alert("Link Copied !!");
+}
+</script>
+
+</body>
+</html>
